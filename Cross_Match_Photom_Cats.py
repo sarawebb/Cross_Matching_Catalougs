@@ -67,12 +67,14 @@ match = ~np.isinf(dist_between)
 
 
 match_table = Table() 
-match_table['band2_match_TF'] = match 
-match_table['band2_match_ID'] = ind_row
-match_table['band1_obs_mag'] = MAG_AUTO_OBS_band1
-match_table['band1_obs_mags_err'] = MAGERR_AUTO_OBS_band1
-match_table['band1_obs_ra'] = RA_OBS_band1
-match_table['band1_obs_dec'] = DEC_OBS_band1
+match_table['band_' + filter_band2+ '_match_TF'] = match 
+match_table['band_' + filter_band2+ '_match_ID'] = ind_row
+match_table['band_' + filter_band1+ '_obs_mag'] = MAG_AUTO_OBS_band1
+match_table['band_' + filter_band1+ '_obs_mags_err'] = MAGERR_AUTO_OBS_band1
+match_table['band_' + filter_band1+ '_obs_ra'] = RA_OBS_band1
+match_table['band_' + filter_band1+ '_obs_dec'] = DEC_OBS_band1
+
+print(match_table) 
 
 band2_match_true = []
 band2_row_matched = []
@@ -82,13 +84,13 @@ band1_band1_obs_ra_matched = []
 band1_band1_obs_dec_matched = []
 
 for row in match_table: 
-	if row['band2_match_TF'] == True:
-		band2_match_true.append(row['band2_match_TF'])
-		band2_row_matched.append(row['band2_match_ID'])
-		band1_band1_mags_matched.append(row['band1_obs_mag'])
-		band1_obs_mags_error_matched.append(row['band1_obs_mags_err'])
-		band1_band1_obs_ra_matched.append(row['band1_obs_ra'])
-		band1_band1_obs_dec_matched.append(row['band1_obs_dec'])
+	if row['band_' + filter_band2+ '_match_TF'] == True:
+		band2_match_true.append(row['band_' + filter_band2+ '_match_TF'])
+		band2_row_matched.append(row['band_' + filter_band2+ '_match_ID'])
+		band1_band1_mags_matched.append(row['band_' + filter_band1+ '_obs_mag'])
+		band1_obs_mags_error_matched.append(row['band_' + filter_band1+ '_obs_mags_err'])
+		band1_band1_obs_ra_matched.append(row['band_' + filter_band1+ '_obs_ra'])
+		band1_band1_obs_dec_matched.append(row['band_' + filter_band1+ '_obs_dec'])
 
 
 band2_RA = []
@@ -109,16 +111,16 @@ for i in band2_row_matched:
 	
 
 source_match_table = Table()
-source_match_table['band2_match_true'] = band2_match_true
-source_match_table['band2_match_rowID'] = band2_row_matched
-source_match_table['band2_mag'] = band2_MAG
-source_match_table['band2_mag_error'] = band2_MAGerr
-source_match_table['band2_ra'] = band2_RA
-source_match_table['band2_dec'] = band2_DEC
-source_match_table['band1_mags_matched'] = band1_band1_mags_matched
-source_match_table['band1_mag_error'] = band1_obs_mags_error_matched
-source_match_table['band1_obs_ra_matched'] = band1_band1_obs_ra_matched
-source_match_table['band1_obs_dec_matched'] = band1_band1_obs_dec_matched	
+source_match_table['band_' +filter_band2+'_match_true'] = band2_match_true
+source_match_table['band_' +filter_band2+'_match_rowID'] = band2_row_matched
+source_match_table['band_' +filter_band2+'_mag'] = band2_MAG
+source_match_table['band_' +filter_band2+'_mag_error'] = band2_MAGerr
+source_match_table['band_' +filter_band2+'_ra'] = band2_RA
+source_match_table['band_' +filter_band2+'_dec'] = band2_DEC
+source_match_table['band_' +filter_band1+'_mags_matched'] = band1_band1_mags_matched
+source_match_table['band_' +filter_band1+'_mag_error'] = band1_obs_mags_error_matched
+source_match_table['band_' +filter_band1+'_obs_ra_matched'] = band1_band1_obs_ra_matched
+source_match_table['band_' +filter_band1+'_obs_dec_matched'] = band1_band1_obs_dec_matched	
 
 
 
@@ -147,41 +149,41 @@ bad_band1_dec =[]
 
 
 for row in source_match_table:
-	if row['band1_mags_matched'] < 30:
-		clean_band2_match_true.append(row['band2_match_true'])
-		clean_band2_row_matched.append(row['band2_match_rowID'])
-		clean_band2_MAG.append(row['band2_mag'])
-		clean_band2_MAGerr.append(row['band2_mag_error'])
-		clean_band2_RA.append(row['band2_ra'])
-		clean_band2_DEC.append(row['band2_dec'])
-		clean_band1_band1_mags_matched.append(row['band1_mags_matched'])
-		clean_band1_obs_mags_error_matched.append(row['band1_mag_error'])
-		clean_band1_band1_obs_ra_matched.append(row['band1_obs_ra_matched'])
-		clean_band1_band1_obs_dec_matched.append(row['band1_obs_dec_matched'])
+	if row['band_' +filter_band1+'_mags_matched'] < 30:
+		clean_band2_match_true.append(row['band_' +filter_band2+'_match_true'])
+		clean_band2_row_matched.append(row['band_' +filter_band2+'_match_rowID'])
+		clean_band2_MAG.append(row['band_' +filter_band2+'_mag'])
+		clean_band2_MAGerr.append(row['band_' +filter_band2+'_mag_error'])
+		clean_band2_RA.append(row['band_' +filter_band2+'_ra'])
+		clean_band2_DEC.append(row['band_' +filter_band2+'_dec'])
+		clean_band1_band1_mags_matched.append(row['band_' +filter_band1+'_mags_matched'])
+		clean_band1_obs_mags_error_matched.append(row['band_' +filter_band1+'_mag_error'])
+		clean_band1_band1_obs_ra_matched.append(row['band_' +filter_band1+'_obs_ra_matched'])
+		clean_band1_band1_obs_dec_matched.append(row['band_' +filter_band1+'_obs_dec_matched'])
 		
 	else: 
-		bad_band2_mag.append(row['band2_mag'])
-		bad_band2_magerr.append(row['band2_mag_error'])
-		bad_band2_ra.append(row['band2_ra'])
-		bad_band2_dec.append(row['band2_dec'])
-		bad_band1_mag.append(row['band1_mags_matched'])
-		bad_band1_magerr.append(row['band1_mag_error'])
-		bad_band1_ra.append(row['band1_obs_ra_matched'])
-		bad_band1_dec.append(row['band1_obs_dec_matched'])
+		bad_band2_mag.append(row['band_' +filter_band2+'_mag'])
+		bad_band2_magerr.append(row['band_' +filter_band2+'_mag_error'])
+		bad_band2_ra.append(row['band_' +filter_band2+'_ra'])
+		bad_band2_dec.append(row['band_' +filter_band2+'_dec'])
+		bad_band1_mag.append(row['band_' +filter_band1+'_mags_matched'])
+		bad_band1_magerr.append(row['band_' +filter_band1+'_mag_error'])
+		bad_band1_ra.append(row['band_' +filter_band1+'_obs_ra_matched'])
+		bad_band1_dec.append(row['band_' +filter_band1+'_obs_dec_matched'])
 
 
 
 b1_cleaned_table = Table()
-b1_cleaned_table['band2_match_true'] = clean_band2_match_true
-b1_cleaned_table['band2_match_rowID'] = clean_band2_row_matched
-b1_cleaned_table['band2_mag'] = clean_band2_MAG
-b1_cleaned_table['band2_mag_error'] = clean_band2_MAGerr
-b1_cleaned_table['band2_ra'] = clean_band2_RA
-b1_cleaned_table['band2_dec'] = clean_band2_DEC
-b1_cleaned_table['band1_mags_matched'] = clean_band1_band1_mags_matched
-b1_cleaned_table['band1_mag_error'] = clean_band1_obs_mags_error_matched
-b1_cleaned_table['band1_obs_ra_matched'] = clean_band1_band1_obs_ra_matched
-b1_cleaned_table['band1_obs_dec_matched'] = clean_band1_band1_obs_dec_matched
+b1_cleaned_table['band_' +filter_band2+'_match_true'] = clean_band2_match_true
+b1_cleaned_table['band_' +filter_band2+'_match_rowID'] = clean_band2_row_matched
+b1_cleaned_table['band_' +filter_band2+'_mag'] = clean_band2_MAG
+b1_cleaned_table['band_' +filter_band2+'_mag_error'] = clean_band2_MAGerr
+b1_cleaned_table['band_' +filter_band2+'_ra'] = clean_band2_RA
+b1_cleaned_table['band_' +filter_band2+'_dec'] = clean_band2_DEC
+b1_cleaned_table['band_' +filter_band1+'_mags_matched'] = clean_band1_band1_mags_matched
+b1_cleaned_table['band_' +filter_band1+'_mag_error'] = clean_band1_obs_mags_error_matched
+b1_cleaned_table['band_' +filter_band1+'_obs_ra_matched'] = clean_band1_band1_obs_ra_matched
+b1_cleaned_table['band_' +filter_band1+'_obs_dec_matched'] = clean_band1_band1_obs_dec_matched
 
 
 
@@ -197,39 +199,39 @@ clean2_band1_band1_obs_ra_matched = []
 clean2_band1_band1_obs_dec_matched = []
 
 for row in b1_cleaned_table:
-	if row['band2_mag'] < 30:
-		clean2_band2_match_true.append(row['band2_match_true'])
-		clean2_band2_row_matched.append(row['band2_match_rowID'])
-		clean2_band2_MAG.append(row['band2_mag'])
-		clean2_band2_MAGerr.append(row['band2_mag_error'])
-		clean2_band2_RA.append(row['band2_ra'])
-		clean2_band2_DEC.append(row['band2_dec'])
-		clean2_band1_band1_mags_matched.append(row['band1_mags_matched'])
-		clean2_band1_obs_mags_error_matched.append(row['band1_mag_error'])
-		clean2_band1_band1_obs_ra_matched.append(row['band1_obs_ra_matched'])
-		clean2_band1_band1_obs_dec_matched.append(row['band1_obs_dec_matched'])
+	if row['band_' +filter_band2+'_mag'] < 30:
+		clean2_band2_match_true.append(row['band_' +filter_band2+'_match_true'])
+		clean2_band2_row_matched.append(row['band_' +filter_band2+'_match_rowID'])
+		clean2_band2_MAG.append(row['band_' +filter_band2+'_mag'])
+		clean2_band2_MAGerr.append(row['band_' +filter_band2+'_mag_error'])
+		clean2_band2_RA.append(row['band_' +filter_band2+'_ra'])
+		clean2_band2_DEC.append(row['band_' +filter_band2+'_dec'])
+		clean2_band1_band1_mags_matched.append(row['band_' +filter_band1+'_mags_matched'])
+		clean2_band1_obs_mags_error_matched.append(row['band_' +filter_band1+'_mag_error'])
+		clean2_band1_band1_obs_ra_matched.append(row['band_' +filter_band1+'_obs_ra_matched'])
+		clean2_band1_band1_obs_dec_matched.append(row['band_' +filter_band1+'_obs_dec_matched'])
 		
 	else: 
-		bad_band2_mag.append(row['band2_mag'])
-		bad_band2_magerr.append(row['band2_mag_error'])
-		bad_band2_ra.append(row['band2_ra'])
-		bad_band2_dec.append(row['band2_dec'])
-		bad_band1_mag.append(row['band1_mags_matched'])
-		bad_band1_magerr.append(row['band1_mag_error'])
-		bad_band1_ra.append(row['band1_obs_ra_matched'])
-		bad_band1_dec.append(row['band1_obs_dec_matched'])	
+		bad_band2_mag.append(row['band_' +filter_band2+'_mag'])
+		bad_band2_magerr.append(row['band_' +filter_band2+'_mag_error'])
+		bad_band2_ra.append(row['band_' +filter_band2+'_ra'])
+		bad_band2_dec.append(row['band_' +filter_band2+'_dec'])
+		bad_band1_mag.append(row['band_' +filter_band1+'_mags_matched'])
+		bad_band1_magerr.append(row['band_' +filter_band1+'_mag_error'])
+		bad_band1_ra.append(row['band_' +filter_band1+'_obs_ra_matched'])
+		bad_band1_dec.append(row['band_' +filter_band1+'_obs_dec_matched'])	
 	
 final_cleaned_matches = Table()
-final_cleaned_matches['band2_match_true'] = clean2_band2_match_true
-final_cleaned_matches['band2_match_rowID'] = clean2_band2_row_matched
-final_cleaned_matches['band2_mag'] = clean2_band2_MAG
-final_cleaned_matches['band2_mag_error'] = clean2_band2_MAGerr
-final_cleaned_matches['band2_ra'] = clean2_band2_RA
-final_cleaned_matches['band2_dec'] = clean2_band2_DEC
-final_cleaned_matches['band1_mags_matched'] = clean2_band1_band1_mags_matched
-final_cleaned_matches['band1_mag_error'] = clean2_band1_obs_mags_error_matched
-final_cleaned_matches['band1_obs_ra_matched'] = clean2_band1_band1_obs_ra_matched
-final_cleaned_matches['band1_obs_dec_matched'] = clean2_band1_band1_obs_dec_matched
+final_cleaned_matches['band_' +filter_band2+'_match_true'] = clean2_band2_match_true
+final_cleaned_matches['band_' +filter_band2+'_match_rowID'] = clean2_band2_row_matched
+final_cleaned_matches['band_' +filter_band2+'_mag'] = clean2_band2_MAG
+final_cleaned_matches['band_' +filter_band2+'_mag_error'] = clean2_band2_MAGerr
+final_cleaned_matches['band_' +filter_band2+'_ra'] = clean2_band2_RA
+final_cleaned_matches['band_' +filter_band2+'_dec'] = clean2_band2_DEC
+final_cleaned_matches['band_' +filter_band1+'_mags_matched'] = clean2_band1_band1_mags_matched
+final_cleaned_matches['band_' +filter_band1+'_mag_error'] = clean2_band1_obs_mags_error_matched
+final_cleaned_matches['band_' +filter_band1+'_obs_ra_matched'] = clean2_band1_band1_obs_ra_matched
+final_cleaned_matches['band_' +filter_band1+'_obs_dec_matched'] = clean2_band1_band1_obs_dec_matched
 
 
 
@@ -238,18 +240,18 @@ final_cleaned_matches['band1_obs_dec_matched'] = clean2_band1_band1_obs_dec_matc
 
 
 match_i_r_table = Table()
-match_i_r_table['band1_mag'] = clean2_band1_band1_mags_matched
-match_i_r_table['band1_mag_err'] = clean2_band1_obs_mags_error_matched
-match_i_r_table['band1_ra'] = clean2_band1_band1_obs_ra_matched
-match_i_r_table['band1_dec'] = clean2_band1_band1_obs_dec_matched
-match_i_r_table['band2_mag'] = clean2_band2_MAG
-match_i_r_table['band2_mag_err'] = clean2_band2_MAGerr
-match_i_r_table['band2_ra'] = clean2_band2_RA
-match_i_r_table['band2_dec'] = clean2_band2_DEC
+match_i_r_table['band_' +filter_band1+'_mag'] = clean2_band1_band1_mags_matched
+match_i_r_table['band_' +filter_band1+'_mag_err'] = clean2_band1_obs_mags_error_matched
+match_i_r_table['band_' +filter_band1+'_ra'] = clean2_band1_band1_obs_ra_matched
+match_i_r_table['band_' +filter_band1+'_dec'] = clean2_band1_band1_obs_dec_matched
+match_i_r_table['band_' +filter_band2+'_mag'] = clean2_band2_MAG
+match_i_r_table['band_' +filter_band2+'_mag_err'] = clean2_band2_MAGerr
+match_i_r_table['band_' +filter_band2+'_ra'] = clean2_band2_RA
+match_i_r_table['band_' +filter_band2+'_dec'] = clean2_band2_DEC
 
-matches_2_band = np.empty((len(match_i_r_table['band2_ra']), 2), dtype = np.float64)
-matches_2_band[:, 0] = match_i_r_table['band2_ra']
-matches_2_band[:, 1] = match_i_r_table['band2_dec']
+matches_2_band = np.empty((len(match_i_r_table['band_' +filter_band2+ '_ra']), 2), dtype = np.float64)
+matches_2_band[:, 0] = match_i_r_table['band_' +filter_band2+'_ra']
+matches_2_band[:, 1] = match_i_r_table['band_' +filter_band2+'_dec']
 #matches_2_band[:, 2] = match_i_r_table['band2_mag']
 #matches_2_band[:, 3] = match_i_r_table['band2_mag_err']
 
@@ -267,19 +269,19 @@ max_radius_2 = 1./3600 # 1 arcsec
 
 dist_between_2, ind_row_2 = crossmatch_angular( matches_2_band, Coords_obs_band3,max_radius_2)
 match2 = ~np.isinf(dist_between_2)
-print(match2)
+#print(match2)
 
 match2_table = Table() 
-match2_table['band3_match_TF'] = match2 
-match2_table['band3_match_ID'] = ind_row_2
-match2_table['band1_obs_mag'] = match_i_r_table['band1_mag']
-match2_table['band1_obs_mags_err'] = match_i_r_table['band1_mag_err']
-match2_table['band1_obs_ra'] = match_i_r_table['band1_ra']
-match2_table['band1_obs_dec'] = match_i_r_table['band1_dec']
-match2_table['band2_obs_mag'] = match_i_r_table['band2_mag']
-match2_table['band2_obs_mags_err'] = match_i_r_table['band2_mag_err']
-match2_table['band2_obs_ra'] = match_i_r_table['band2_ra']
-match2_table['band2_obs_dec'] = match_i_r_table['band2_dec']
+match2_table['band_' +filter_band3+'_match_TF'] = match2 
+match2_table['band_' +filter_band3+'_match_ID'] = ind_row_2
+match2_table['band_' +filter_band1+'_obs_mag'] = match_i_r_table['band_' +filter_band1+'_mag']
+match2_table['band_' +filter_band1+'_obs_mags_err'] = match_i_r_table['band_' +filter_band1+'_mag_err']
+match2_table['band_' +filter_band1+'_obs_ra'] = match_i_r_table['band_' +filter_band1+'_ra']
+match2_table['band_' +filter_band1+'_obs_dec'] = match_i_r_table['band_' +filter_band1+'_dec']
+match2_table['band_' +filter_band2+'_obs_mag'] = match_i_r_table['band_' +filter_band2+'_mag']
+match2_table['band_' +filter_band2+'_obs_mags_err'] = match_i_r_table['band_' +filter_band2+'_mag_err']
+match2_table['band_' +filter_band2+'_obs_ra'] = match_i_r_table['band_' +filter_band2+'_ra']
+match2_table['band_' +filter_band2+'_obs_dec'] = match_i_r_table['band_' +filter_band2+'_dec']
 
 #print(match2_table)
 #print(len(match2_table))
@@ -302,16 +304,16 @@ all_true_band3_dec = []
 
 
 for row in match2_table: 
-	if row['band3_match_TF'] == True:
-		all_true_band3_id.append(row['band3_match_ID'])
-		all_true_band1_mag.append(row['band1_obs_mag'])
-		all_true_band1_mag_err.append(row['band1_obs_mags_err'])
-		all_true_band1_ra.append(row['band1_obs_ra'])
-		all_true_band1_dec.append(row['band1_obs_dec'])
-		all_true_band2_mag.append(row['band2_obs_mag'])
-		all_true_band2_mag_err.append(row['band2_obs_mags_err'])
-		all_true_band2_ra.append(row['band2_obs_ra'])
-		all_true_band2_dec.append(row['band2_obs_dec'])
+	if row['band_' +filter_band3+'_match_TF'] == True:
+		all_true_band3_id.append(row['band_' +filter_band3+'_match_ID'])
+		all_true_band1_mag.append(row['band_' +filter_band1+'_obs_mag'])
+		all_true_band1_mag_err.append(row['band_' +filter_band1+'_obs_mags_err'])
+		all_true_band1_ra.append(row['band_' +filter_band1+'_obs_ra'])
+		all_true_band1_dec.append(row['band_' +filter_band1+'_obs_dec'])
+		all_true_band2_mag.append(row['band_' +filter_band2+'_obs_mag'])
+		all_true_band2_mag_err.append(row['band_' +filter_band2+'_obs_mags_err'])
+		all_true_band2_ra.append(row['band_' +filter_band2+'_obs_ra'])
+		all_true_band2_dec.append(row['band_' +filter_band2+'_obs_dec'])
 
 band3_RA = []
 band3_DEC = []
@@ -334,18 +336,18 @@ for i in all_true_band3_id:
 ###---------------------------------------- create final table with all band color information ----------------------------#########
 
 final_table = Table()
-final_table['band1_mag'] = all_true_band1_mag
-final_table['band1_mag_err'] = all_true_band1_mag_err
-final_table['band1_ra'] = all_true_band1_ra
-final_table['band1_dec'] = all_true_band1_dec
-final_table['band2_mag'] = all_true_band2_mag
-final_table['band2_mag_err'] = all_true_band2_mag_err
-final_table['band2_ra'] = all_true_band2_ra
-final_table['band2_dec'] = all_true_band2_dec
-final_table['band3_mag'] = band3_MAG
-final_table['band3_mag_err'] = band3_MAGerr
-final_table['band3_ra'] = band3_RA
-final_table['band3_dec'] = band3_DEC
+final_table['band_' +filter_band1+'_mag'] = all_true_band1_mag
+final_table['band_' +filter_band1+'_mag_err'] = all_true_band1_mag_err
+final_table['band_' +filter_band1+'_ra'] = all_true_band1_ra
+final_table['band_' +filter_band1+'_dec'] = all_true_band1_dec
+final_table['band_' +filter_band2+'_mag'] = all_true_band2_mag
+final_table['band_' +filter_band2+'_mag_err'] = all_true_band2_mag_err
+final_table['band_' +filter_band2+'_ra'] = all_true_band2_ra
+final_table['band_' +filter_band2+'_dec'] = all_true_band2_dec
+final_table['band_' +filter_band3+'_mag'] = band3_MAG
+final_table['band_' +filter_band3+'_mag_err'] = band3_MAGerr
+final_table['band_' +filter_band3+'_ra'] = band3_RA
+final_table['band_' +filter_band3+'_dec'] = band3_DEC
 
 print('final table of crossmatched sources has been created, see output file "crossmatched_' + field_name + '_bands' + filter_band1 + '_' + filter_band2 + '_' +filter_band3+ '_' + date + '.fits" ' )
 
@@ -354,6 +356,6 @@ print('final table of crossmatched sources has been created, see output file "cr
 t = final_table
 output = 'crossmatched_' + field_name + '_bands' + filter_band1 + '_' + filter_band2 + '_' +filter_band3+ '_' + date + '.fits'
 
-
+t.write(output, format='fits', overwrite = True) 
 	
 

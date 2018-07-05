@@ -1,6 +1,7 @@
-# To using field cross matching script 
+# For cross matching script (Cross_Match_Photom_Cats.py) 
 
 Please note this script is structured to take in SExtractor cataloug outputs with the following columns: 
+ 
   1 MAG_APER		   Fixed aperture magnitude vector	     
   2 MAGERR_APER 	   RMS error vector for fixed aperture mag.  
   3 MAG_AUTO		   Kron-like elliptical aperture magnitude   
@@ -32,3 +33,9 @@ date =   1703017
 ## 4. The full cross matched table will be outputed as a fits file: 
 The fits file will be in the following format: 
 **crossmatched_+ field_name + _bands + filter_band1 + _ + filter_band2 + _ +filter_band3+ _ + date + .fits**
+
+#  For plotting color color plots of crossmatched cats ( Plot_Color_Color.py) 
+
+## 1. In script change the filter bands 1, 2, 3 to the same input used with Cross_Match_Photom_Cats.py
+
+## 2. Run from Command line for standard r-i vs g-r plot or edit newly created table for speicfic plots 
