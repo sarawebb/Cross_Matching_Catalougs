@@ -7,6 +7,7 @@ from astroML.crossmatch import crossmatch_angular
 from astroML.datasets import fetch_imaging_sample, fetch_sdss_S82standards
 from astroML.plotting import hist
 import csv 
+from astropy.io import fits 
 
 
 ######---------------- Variables-----------------#############
@@ -53,7 +54,7 @@ Coords_obs_band3[:, 1] = DEC_OBS_band3
 Coords_obs_band3[:, 2] = MAG_AUTO_OBS_band3
 Coords_obs_band3[:, 3] = MAGERR_AUTO_OBS_band3
 
-print(Coords_obs_band3)
+#print(Coords_obs_band3)
 
 
 #---------------Cross match between sources between the two bands -------------- #
@@ -346,12 +347,13 @@ final_table['band3_mag_err'] = band3_MAGerr
 final_table['band3_ra'] = band3_RA
 final_table['band3_dec'] = band3_DEC
 
-print(final_table)
+print('final table of crossmatched sources has been created, see output file "crossmatched_' + field_name + '_bands' + filter_band1 + '_' + filter_band2 + '_' +filter_band3+ '_' + date + '.fits" ' )
 
-outputfile = 'crossmatched_'+ field_name+ '_'+ filter_band1 + '_' + filter_band2 + '_' +filter_band3+ '_' + date + '.csv'
 
-with open(outputfile, 'w') as output:
-	writer = csv.writer(output, lineterminator = '\n')
-	for  val in final_table:
-		writer.writerow([val])
+
+t = final_table
+output = 'crossmatched_' + field_name + '_bands' + filter_band1 + '_' + filter_band2 + '_' +filter_band3+ '_' + date + '.fits'
+
+
+	
 
