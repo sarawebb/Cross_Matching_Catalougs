@@ -1,6 +1,6 @@
 # For cross matching script (Cross_Match_Photom_Cats.py) 
 
-Please note this script is structured to take in SExtractor cataloug outputs with the following columns: 
+Please note this script is structured to take in SExtractor catalog outputs with the following columns: 
  
   1 MAG_APER		   Fixed aperture magnitude vector	     
   2 MAGERR_APER 	   RMS error vector for fixed aperture mag.  
@@ -39,3 +39,9 @@ The fits file will be in the following format:
 ## 1. In script change the filter bands 1, 2, 3 to the same input used with Cross_Match_Photom_Cats.py
 
 ## 2. Run from Command line for standard r-i vs g-r plot or edit newly created table for speicfic plots 
+
+# For cross matching candidate to catalog
+
+## 1. Edit input params in script and enter the candidate coords and search radius in arc seconds. 
+
+## 2. Run Script and and matches in the three bands with errors will be produced 
