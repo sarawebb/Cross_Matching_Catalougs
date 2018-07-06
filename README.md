@@ -16,7 +16,7 @@ Please note this script is structured to take in SExtractor catalog outputs with
  **1. Structure of Catalouges for input**
 
 Please insure all catalogs are in this format or edit script to accept alturnate formate 
-**field_name +'_' + filter_band1 + '_band_+' + date +'.cat'**
+**field_name_filter_band1_band_date.cat'**
 eg. antlia_i_band_170318.cat 
 Data can be ob observations or of processing. 
 
