@@ -15,6 +15,8 @@ filter_band1 = 'i'
 filter_band2 = 'r'
 filter_band3 = 'g'
 
+#--- open the cross matched cats ------# 
+
 crossed_matched_cat = 'crossmatched_test_Bandsi_r_g_000.fits'
 hdul = fits.open(crossed_matched_cat)
 data = hdul[1].data
