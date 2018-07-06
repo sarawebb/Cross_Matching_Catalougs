@@ -13,14 +13,14 @@ Please note this script is structured to take in SExtractor catalog outputs with
   9 ALPHA_J2000 	   Right ascension of barycenter (J2000)     
  10 DELTA_J2000 	   Declination of barycenter (J2000)	     
  
-## 1. Structure of Catalouges for input
+ **1. Structure of Catalouges for input**
 
 Please insure all catalogs are in this format or edit script to accept alturnate formate 
 **field_name +'_' + filter_band1 + '_band_+' + date +'.cat'**
 eg. antlia_i_band_170318.cat 
 Data can be ob observations or of processing. 
 
-## 2. Set Parameters at start of script
+**2. Set Parameters at start of script**
 
 filter_band1 = 'i'
 filter_band2 = 'r'
@@ -28,20 +28,21 @@ filter_band3 = 'g'
 field_name = 'antlia'
 date =   1703017 
 
-## 3. Run from commandline or in IDE 
+**3. Run from commandline or in IDE**
 
-## 4. The full cross matched table will be outputed as a fits file: 
+**4. The full cross matched table will be outputed as a fits file:**
+
 The fits file will be in the following format: 
 **crossmatched_+ field_name + _bands + filter_band1 + _ + filter_band2 + _ +filter_band3+ _ + date + .fits**
 
 #  For plotting color color plots of crossmatched cats ( Plot_Color_Color.py) 
 
-## 1. In script change the filter bands 1, 2, 3 to the same input used with Cross_Match_Photom_Cats.py
+1. In script change the filter bands 1, 2, 3 to the same input used with Cross_Match_Photom_Cats.py
 
-## 2. Run from Command line for standard r-i vs g-r plot or edit newly created table for speicfic plots 
+2. Run from Command line for standard r-i vs g-r plot or edit newly created table for speicfic plots 
 
 # For cross matching candidate to catalog
 
-## 1. Edit input params in script and enter the candidate coords and search radius in arc seconds. 
+1. Edit input params in script and enter the candidate coords and search radius in arc seconds. 
 
-## 2. Run Script and and matches in the three bands with errors will be produced 
+2. Run Script and and matches in the three bands with errors will be produced 
